@@ -14,7 +14,62 @@ const Index = () => {
   const [isLightOn, setIsLightOn] = useState<boolean>(false);
   const [activityLog, setActivityLog] = useState<Array<{timestamp: string; message: string; highlight?: string}>>([]);
 
-  // Mock data polling - Replace with actual API call to your Raspberry Pi
+  // Listen for plant updates from AI chat
+  useEffect(() => {
+    const handlePlantUpdate = (event: CustomEvent) => {
+      const plantData = event.detail;
+      
+      // Create or update plant profile
+      const newPlant: PlantProfile = {
+        id: plantData.name.toLowerCase().replace(/\s+/g, "_"),
+        name: plantData.name,
+        tempMin: plantData.tempMin,
+        tempMax: plantData.tempMax,
+        humidityMin: plantData.humidityMin,
+        humidityMax: plantData.humidityMax,
+        waterLevel: plantData.waterLevel,
+        icon: "🌱",
+      };
+      
+      setSelectedPlant(newPlant);
+      
+      const logEntry = {
+        timestamp: new Date().toISOString(),
+        message: `Plant profile updated to ${plantData.name} via AI Integration`,
+        highlight: plantData.name,
+      };
+      setActivityLog(prev => [logEntry, ...prev.slice(0, 9)]);
+    };
+
+    window.addEventListener("plantUpdated", handlePlantUpdate as EventListener);
+    
+    // Check for saved plant on mount
+    const savedPlantData = localStorage.getItem("selectedPlantData");
+    if (savedPlantData) {
+      try {
+        const plantData = JSON.parse(savedPlantData);
+        const newPlant: PlantProfile = {
+          id: plantData.name.toLowerCase().replace(/\s+/g, "_"),
+          name: plantData.name,
+          tempMin: plantData.tempMin,
+          tempMax: plantData.tempMax,
+          humidityMin: plantData.humidityMin,
+          humidityMax: plantData.humidityMax,
+          waterLevel: plantData.waterLevel,
+          icon: "🌱",
+        };
+        setSelectedPlant(newPlant);
+      } catch (error) {
+        console.error("Failed to load saved plant:", error);
+      }
+    }
+
+    return () => {
+      window.removeEventListener("plantUpdated", handlePlantUpdate as EventListener);
+    };
+  }, []);
+
+  // Mock data polling
   useEffect(() => {
     const fetchSensorData = () => {
       const mockData: SensorData = {
@@ -87,6 +142,19 @@ const Index = () => {
     });
   };
 
+  const handlePlantSelect = (plant: PlantProfile) => {
+    setSelectedPlant(plant);
+    localStorage.setItem("selectedPlantName", plant.name);
+    localStorage.setItem("selectedPlantData", JSON.stringify({
+      name: plant.name,
+      tempMin: plant.tempMin,
+      tempMax: plant.tempMax,
+      humidityMin: plant.humidityMin,
+      humidityMax: plant.humidityMax,
+      waterLevel: plant.waterLevel,
+    }));
+  };
+
   return (
     <div className="p-6 space-y-6">
       {/* Control Buttons */}
@@ -103,7 +171,7 @@ const Index = () => {
             key={plant.id}
             plant={plant}
             isActive={selectedPlant.id === plant.id}
-            onClick={() => setSelectedPlant(plant)}
+            onClick={() => handlePlantSelect(plant)}
           />
         ))}
       </div>

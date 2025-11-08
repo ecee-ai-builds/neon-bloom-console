@@ -7,6 +7,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Bell, RefreshCcw } from "lucide-react";
 import Index from "./pages/Index";
+import Plants from "./pages/Plants";
 import Systems from "./pages/Systems";
 import NotFound from "./pages/NotFound";
 
@@ -57,6 +58,7 @@ const App = () => (
               <main className="flex-1 overflow-auto">
                 <Routes>
                   <Route path="/" element={<Index />} />
+                  <Route path="/plants" element={<Plants />} />
                   <Route path="/systems" element={<Systems />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />

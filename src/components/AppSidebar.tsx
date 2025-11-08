@@ -13,7 +13,7 @@ import {
 
 const navItems = [
   { title: "COMMAND CENTER", url: "/", icon: Monitor },
-  { title: "PLANT NETWORK", url: "/plants", icon: Sprout },
+  { title: "PLANT AI INTEGRATION", url: "/plants", icon: Sprout },
   { title: "OPERATIONS", url: "/operations", icon: Activity },
   { title: "SYSTEMS", url: "/systems", icon: Settings },
 ];
