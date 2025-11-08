@@ -8,35 +8,35 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Cyberpunk color system - Dark mode by default */
-    --background: 230 45% 8%;
-    --foreground: 180 100% 85%;
+    /* Tactical Ops color system - Dark theme */
+    --background: 0 0% 7%;
+    --foreground: 0 0% 85%;
 
-    --card: 230 40% 12%;
-    --card-foreground: 180 100% 90%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 85%;
 
-    --popover: 230 45% 10%;
-    --popover-foreground: 180 100% 90%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 85%;
 
-    /* Neon cyan primary */
-    --primary: 180 100% 50%;
-    --primary-foreground: 230 45% 8%;
-    --primary-glow: 180 100% 60%;
+    /* Orange tactical accent */
+    --primary: 18 85% 57%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 18 85% 65%;
 
-    /* Magenta secondary */
-    --secondary: 300 100% 50%;
-    --secondary-foreground: 230 45% 8%;
+    /* Dark secondary */
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 85%;
 
     /* Darker muted tones */
-    --muted: 230 35% 18%;
-    --muted-foreground: 180 40% 60%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 50%;
 
-    /* Yellow accent */
+    /* Yellow accent for highlights */
     --accent: 45 100% 50%;
-    --accent-foreground: 230 45% 8%;
+    --accent-foreground: 0 0% 10%;
 
-    /* Red destructive */
-    --destructive: 0 100% 50%;
+    /* Red destructive/critical */
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
     /* Success green */
@@ -44,26 +44,33 @@ All colors MUST be HSL.
     --success-foreground: 0 0% 100%;
 
     /* Warning orange */
-    --warning: 30 100% 50%;
-    --warning-foreground: 230 45% 8%;
+    --warning: 18 85% 57%;
+    --warning-foreground: 0 0% 100%;
 
-    --border: 180 100% 20%;
-    --input: 230 40% 15%;
-    --ring: 180 100% 50%;
+    --border: 0 0% 20%;
+    --input: 0 0% 12%;
+    --ring: 18 85% 57%;
 
     --radius: 0.25rem;
 
+    /* Sidebar colors */
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 0 0% 60%;
+    --sidebar-primary: 18 85% 57%;
+    --sidebar-primary-foreground: 0 0% 10%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 85%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 18 85% 57%;
+
     /* Gradients */
-    --gradient-cyber: linear-gradient(135deg, hsl(180 100% 50% / 0.2), hsl(300 100% 50% / 0.2));
-    --gradient-glow: linear-gradient(180deg, hsl(180 100% 50% / 0.1), transparent);
+    --gradient-tactical: linear-gradient(135deg, hsl(0 0% 10% / 0.5), hsl(0 0% 8% / 0.5));
     
-    /* Shadows with glow */
-    --shadow-cyan: 0 0 20px hsl(180 100% 50% / 0.3);
-    --shadow-magenta: 0 0 20px hsl(300 100% 50% / 0.3);
+    /* Shadows */
     --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.5), 0 2px 4px -1px hsl(0 0% 0% / 0.3);
 
     /* Animations */
-    --transition-glow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
@@ -74,30 +81,22 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-mono;
-    background-image: 
-      linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 20px 20px;
   }
 }
 
-/* Custom cyberpunk effects */
+/* Custom tactical effects */
 @layer utilities {
-  .glow-cyan {
-    text-shadow: 0 0 10px hsl(180 100% 50% / 0.5);
-  }
-  
-  .glow-magenta {
-    text-shadow: 0 0 10px hsl(300 100% 50% / 0.5);
+  .glow-orange {
+    text-shadow: 0 0 10px hsl(18 85% 57% / 0.5);
   }
 
-  .border-glow {
-    box-shadow: 0 0 10px hsl(180 100% 50% / 0.3), inset 0 0 10px hsl(180 100% 50% / 0.1);
-  }
-
-  .card-cyber {
-    background: linear-gradient(135deg, hsl(230 40% 12% / 0.9), hsl(230 40% 10% / 0.9));
-    border: 1px solid hsl(180 100% 50% / 0.3);
+  .card-tactical {
+    background: hsl(0 0% 10% / 0.8);
+    border: 1px solid hsl(0 0% 20%);
     box-shadow: var(--shadow-card);
+  }
+
+  .accent-border-left {
+    border-left: 2px solid hsl(18 85% 57%);
   }
 }
