@@ -170,7 +170,7 @@ const Plants = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-4rem)] flex flex-col p-6">
+    <div className="h-full flex flex-col p-6">
       {/* Header */}
       <div className="mb-6 flex-shrink-0">
         <h1 className="text-2xl font-bold text-foreground uppercase tracking-wider mb-2">

@@ -20,12 +20,12 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <SidebarProvider>
-          <div className="min-h-screen flex w-full">
+          <div className="flex min-h-screen w-full bg-background">
             <AppSidebar />
             
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col min-w-0">
               {/* Top Header */}
-              <header className="h-16 border-b border-border bg-card flex items-center justify-between px-6">
+              <header className="h-16 border-b border-border bg-card flex items-center justify-between px-6 flex-shrink-0">
                 <div className="flex items-center gap-4">
                   <SidebarTrigger className="text-foreground hover:text-primary" />
                   <div className="text-sm">
@@ -55,7 +55,7 @@ const App = () => (
               </header>
 
               {/* Main Content */}
-              <main className="flex-1 overflow-auto">
+              <main className="flex-1 overflow-auto min-h-0">
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/plants" element={<Plants />} />
