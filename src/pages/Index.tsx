@@ -156,7 +156,7 @@ const Index = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 h-[calc(100vh-4rem)] overflow-auto">
       {/* Control Buttons */}
       <ControlButtons
         onWater={handleWater}

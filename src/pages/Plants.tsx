@@ -170,9 +170,9 @@ const Plants = () => {
   };
 
   return (
-    <div className="h-full flex flex-col p-6">
+    <div className="h-[calc(100vh-4rem)] flex flex-col p-6">
       {/* Header */}
-      <div className="mb-6">
+      <div className="mb-6 flex-shrink-0">
         <h1 className="text-2xl font-bold text-foreground uppercase tracking-wider mb-2">
           PLANT AI INTEGRATION
         </h1>
@@ -182,7 +182,7 @@ const Plants = () => {
       </div>
 
       {/* Info Banner */}
-      <div className="card-tactical rounded p-4 mb-6 flex items-start gap-3">
+      <div className="card-tactical rounded p-4 mb-6 flex items-start gap-3 flex-shrink-0">
         <AlertCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
         <div className="text-sm text-muted-foreground">
           <p className="font-bold text-foreground mb-1">AI-Powered Plant Assistant</p>
@@ -194,9 +194,9 @@ const Plants = () => {
       </div>
 
       {/* Chat Area */}
-      <div className="flex-1 card-tactical rounded overflow-hidden flex flex-col">
-        <ScrollArea className="flex-1 p-6" ref={scrollRef}>
-          <div className="space-y-4">
+      <div className="flex-1 card-tactical rounded overflow-hidden flex flex-col min-h-0">
+        <ScrollArea className="flex-1 p-6 min-h-0" ref={scrollRef}>
+          <div className="space-y-4 pb-4">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -240,7 +240,7 @@ const Plants = () => {
         </ScrollArea>
 
         {/* Input Area */}
-        <div className="border-t border-border p-4">
+        <div className="border-t border-border p-4 flex-shrink-0">
           <div className="flex gap-2">
             <Input
               value={input}

@@ -118,7 +118,7 @@ const Systems = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 h-[calc(100vh-4rem)] overflow-auto">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-foreground uppercase tracking-wider mb-2">
