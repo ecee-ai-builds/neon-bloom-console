@@ -3,12 +3,15 @@ import { Thermometer, Droplets, Droplet } from "lucide-react";
 import { PlantProfileCard } from "@/components/PlantProfileCard";
 import { MetricCard } from "@/components/MetricCard";
 import { ActivityLog } from "@/components/ActivityLog";
+import { ControlButtons } from "@/components/ControlButtons";
 import { PLANT_PROFILES, PlantProfile, SensorData } from "@/types/plant";
+import { toast } from "sonner";
 
 const Index = () => {
   const [selectedPlant, setSelectedPlant] = useState<PlantProfile>(PLANT_PROFILES[0]);
   const [sensorData, setSensorData] = useState<SensorData | null>(null);
   const [waterLevel, setWaterLevel] = useState<number>(75);
+  const [isLightOn, setIsLightOn] = useState<boolean>(false);
   const [activityLog, setActivityLog] = useState<Array<{timestamp: string; message: string; highlight?: string}>>([]);
 
   // Mock data polling - Replace with actual API call to your Raspberry Pi
@@ -57,8 +60,42 @@ const Index = () => {
     return "critical";
   };
 
+  const handleWater = () => {
+    const newWaterLevel = Math.min(100, waterLevel + 15);
+    setWaterLevel(newWaterLevel);
+    const logEntry = {
+      timestamp: new Date().toISOString(),
+      message: `Watering initiated for ${selectedPlant.name} - Level increased to ${newWaterLevel}%`,
+      highlight: selectedPlant.name,
+    };
+    setActivityLog(prev => [logEntry, ...prev.slice(0, 9)]);
+    toast.success("Watering system activated", {
+      description: `Water level increased to ${newWaterLevel}%`,
+    });
+  };
+
+  const handleLight = () => {
+    setIsLightOn(!isLightOn);
+    const logEntry = {
+      timestamp: new Date().toISOString(),
+      message: `Grow light ${!isLightOn ? 'activated' : 'deactivated'} for ${selectedPlant.name}`,
+      highlight: selectedPlant.name,
+    };
+    setActivityLog(prev => [logEntry, ...prev.slice(0, 9)]);
+    toast.success(`Light ${!isLightOn ? 'turned on' : 'turned off'}`, {
+      description: `Grow light ${!isLightOn ? 'activated' : 'deactivated'}`,
+    });
+  };
+
   return (
     <div className="p-6 space-y-6">
+      {/* Control Buttons */}
+      <ControlButtons
+        onWater={handleWater}
+        onLight={handleLight}
+        isLightOn={isLightOn}
+      />
+
       {/* Plant Profile Cards - Top 3 */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {PLANT_PROFILES.slice(0, 3).map((plant) => (

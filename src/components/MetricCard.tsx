@@ -54,7 +54,7 @@ export const MetricCard = ({ icon: Icon, label, value, unit, min, max, status }:
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">{label}</h3>
             <p className={`text-3xl font-bold ${getStatusColor()} glow-orange`}>
-              {value !== null ? `${value.toFixed(2)}${unit}` : "--"}
+              {value !== null ? `${Math.round(value)}${unit}` : "--"}
             </p>
           </div>
         </div>
